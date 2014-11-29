@@ -8,7 +8,7 @@ namespace Tic_Tac_Toe
     {
         private int xWins;
         private int yWins;
-        private int d;
+        private int draws;
         private List<Button> buttons = new List<Button>();
 
         public Form1()
@@ -44,6 +44,7 @@ namespace Tic_Tac_Toe
 
         private void AddButtonToBoard(Button button)
         {
+            flowLayoutPanel1.Width = 350;
             flowLayoutPanel1.Controls.Add(button);
         }
 
@@ -77,15 +78,26 @@ namespace Tic_Tac_Toe
 
             turns++;
 
-            //call check funtion for conditions
-            check();
-            if (turns == 9)
+            //call Check funtion for conditions
+            Check();
+            if (IsDraw())
             {
-                MessageBox.Show("Game Draw");
-                d++;
-                label6.Text = d.ToString();
-                ClearBoard();
+                draws++;
+                UpdateUi();
             }
+        }
+
+        private void UpdateUi()
+        {
+            MessageBox.Show("Game Draw");            
+            numberOfDraws.Text = draws.ToString();
+            ClearBoard();
+        }
+
+        private bool IsDraw()
+        {
+            const int maxTurns = 9;
+            return turns == maxTurns;
         }
 
         private void SwitchTurn()
@@ -96,138 +108,52 @@ namespace Tic_Tac_Toe
                 currentTurn = "X";
         }
 
-        void check() // Here is the check() function in which conditions will full fill.
+        private void Check()
         {
-            //FOr Rows
-            if (buttons[0].Text == buttons[1].Text && buttons[1].Text == buttons[2].Text && buttons[0].Text != "")
-            {
-                MessageBox.Show(buttons[0].Text + " Wins");
-                if (buttons[0].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
+            ButtonsMatch(buttons[0], buttons[1], buttons[2]);
+            ButtonsMatch(buttons[3], buttons[4], buttons[5]);
+            ButtonsMatch(buttons[6], buttons[7], buttons[8]);
 
-                ClearBoard();
-            }
-            if (buttons[3].Text == buttons[4].Text && buttons[4].Text == buttons[5].Text && buttons[3].Text != "")
-            {
-                MessageBox.Show(buttons[3].Text + " Wins");
-                if (buttons[3].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
-            if (buttons[6].Text == buttons[7].Text && buttons[7].Text == buttons[8].Text && buttons[6].Text != "")
-            {
-                MessageBox.Show(buttons[6].Text + " Wins");
-                if (buttons[6].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
+            ButtonsMatch(buttons[0], buttons[3], buttons[6]);
+            ButtonsMatch(buttons[1], buttons[4], buttons[7]);
+            ButtonsMatch(buttons[2], buttons[5], buttons[8]);
 
-            //For Coloums
-            if (buttons[0].Text == buttons[3].Text && buttons[3].Text == buttons[6].Text && buttons[0].Text != "")
-            {
-                MessageBox.Show(buttons[0].Text + " Wins");
-                if (buttons[0].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
-            if (buttons[1].Text == buttons[4].Text && buttons[4].Text == buttons[7].Text && buttons[1].Text != "")
-            {
-                MessageBox.Show(buttons[1].Text + " Wins");
-                if (buttons[1].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
-            if (buttons[2].Text == buttons[5].Text && buttons[5].Text == buttons[8].Text && buttons[2].Text != "")
-            {
-                MessageBox.Show(buttons[2].Text + " Wins");
-                if (buttons[2].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
-
-            //For Diagnols
-            if (buttons[0].Text == buttons[4].Text && buttons[4].Text == buttons[8].Text && buttons[0].Text != "")
-            {
-                MessageBox.Show(buttons[0].Text + " Wins");
-                if (buttons[0].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
-            if (buttons[2].Text == buttons[4].Text && buttons[4].Text == buttons[6].Text && buttons[2].Text != "")
-            {
-                MessageBox.Show(buttons[2].Text + " Wins");
-                if (buttons[2].Text == "X")
-                {
-                    xWins++;
-                    label3.Text = xWins.ToString();
-                }
-                else
-                {
-                    yWins++;
-                    label4.Text = yWins.ToString();
-                }
-                ClearBoard();
-            }
+            ButtonsMatch(buttons[0], buttons[4], buttons[8]);
+            ButtonsMatch(buttons[2], buttons[4], buttons[6]);            
         }
 
+        private bool ButtonsMatch(Button button1, Button button2, Button button3)
+        {
+            if (button1.Text == "")
+            {
+                return false;
+            }
 
+            if (button1.Text == button2.Text && button2.Text == button3.Text)
+            {
+                SetWinner(button1);
+                ClearBoard();
 
+                return true;
+            }
+
+            return false;
+        }
+
+        private void SetWinner(Button button1)
+        {
+            MessageBox.Show(button1.Text + " Wins");
+            if (button1.Text == "X")
+            {
+                xWins++;
+                xScore.Text = xWins.ToString();
+            }
+            else
+            {
+                yWins++;
+                yScore.Text = yWins.ToString();
+            }
+        }
     }
 
 }
