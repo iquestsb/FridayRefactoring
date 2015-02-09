@@ -32,10 +32,10 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.xScore = new System.Windows.Forms.Label();
-            this.yScore = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.numberOfDraws = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -78,27 +78,27 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "\'O\' Wins:";
             // 
-            // xScore
+            // label3
             // 
-            this.xScore.AutoSize = true;
-            this.xScore.BackColor = System.Drawing.Color.Gray;
-            this.xScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xScore.ForeColor = System.Drawing.Color.White;
-            this.xScore.Location = new System.Drawing.Point(141, 9);
-            this.xScore.Name = "xScore";
-            this.xScore.Size = new System.Drawing.Size(0, 20);
-            this.xScore.TabIndex = 3;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Gray;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(141, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 20);
+            this.label3.TabIndex = 3;
             // 
-            // yScore
+            // label4
             // 
-            this.yScore.AutoSize = true;
-            this.yScore.BackColor = System.Drawing.Color.Gray;
-            this.yScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yScore.ForeColor = System.Drawing.Color.White;
-            this.yScore.Location = new System.Drawing.Point(141, 51);
-            this.yScore.Name = "yScore";
-            this.yScore.Size = new System.Drawing.Size(0, 20);
-            this.yScore.TabIndex = 4;
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Gray;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(141, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 20);
+            this.label4.TabIndex = 4;
             // 
             // label5
             // 
@@ -112,16 +112,16 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Draws:";
             // 
-            // numberOfDraws
+            // label6
             // 
-            this.numberOfDraws.AutoSize = true;
-            this.numberOfDraws.BackColor = System.Drawing.Color.Gray;
-            this.numberOfDraws.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numberOfDraws.ForeColor = System.Drawing.Color.White;
-            this.numberOfDraws.Location = new System.Drawing.Point(283, 32);
-            this.numberOfDraws.Name = "numberOfDraws";
-            this.numberOfDraws.Size = new System.Drawing.Size(0, 20);
-            this.numberOfDraws.TabIndex = 6;
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Gray;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(283, 32);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 20);
+            this.label6.TabIndex = 6;
             // 
             // label7
             // 
@@ -181,10 +181,10 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.numberOfDraws);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.yScore);
-            this.Controls.Add(this.xScore);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -206,10 +206,10 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label xScore;
-        private System.Windows.Forms.Label yScore;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label numberOfDraws;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
