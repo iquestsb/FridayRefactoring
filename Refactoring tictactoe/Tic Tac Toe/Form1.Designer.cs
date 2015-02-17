@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonsLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,15 +44,15 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Gray;
-            this.flowLayoutPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel1.BackgroundImage")));
-            this.flowLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.ForeColor = System.Drawing.Color.Yellow;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(75, 74);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(347, 324);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.buttonsLayout.BackColor = System.Drawing.Color.Gray;
+            this.buttonsLayout.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel1.BackgroundImage")));
+            this.buttonsLayout.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.buttonsLayout.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonsLayout.ForeColor = System.Drawing.Color.Yellow;
+            this.buttonsLayout.Location = new System.Drawing.Point(75, 74);
+            this.buttonsLayout.Name = "flowLayoutPanel1";
+            this.buttonsLayout.Size = new System.Drawing.Size(347, 324);
+            this.buttonsLayout.TabIndex = 0;
             // 
             // label1
             // 
@@ -187,7 +187,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.buttonsLayout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -203,7 +203,7 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel buttonsLayout;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

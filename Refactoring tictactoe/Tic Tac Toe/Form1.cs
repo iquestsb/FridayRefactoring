@@ -8,40 +8,11 @@ namespace Tic_Tac_Toe
     {
         private int xWins;
 
-        public int XWins
-        {
-            get { return xWins; }
-            set
-            {
-                xWins = value;
-                UpdateUI();
-            }
-        }
-
         private int yWins;
-
-        public int YWins
-        {
-            get { return yWins; }
-            set
-            {
-                yWins = value;
-                UpdateUI();
-            }
-        }
 
         private int drawGames;
 
-        public int DrawGames
-        {
-            get { return drawGames; }
-            set
-            {
-                drawGames = value;
-                UpdateUI();
-            }
-        }
-        private List<Button> buttons = new List<Button>();
+        Board board = new Board();
 
         public Form1()
         {
@@ -50,229 +21,82 @@ namespace Tic_Tac_Toe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CreateBoard();
-        }
-
-        private void CreateBoard()
-        {
             for (int i = 0; i < 9; i++)
-                CreateCell();
+                CreateButton(i);
         }
 
-        private void CreateCell()
+        private void CreateButton(int i)
         {
-            Button button = CreateButton();
-            buttons.Add(button);
-            AddButtonToBoard(button);
-        }
-
-
-        private Button CreateButton()
-        {
-            var button = new Button { Width = 100, Height = 100 };
+            Button button = new Button { Width = 100, Height = 100 };
+            button.Tag = i;
             button.Click += OnButtonClick;
-
-            return button;
+            buttonsLayout.Controls.Add(button);
         }
-
-        private void AddButtonToBoard(Button button)
-        {
-            flowLayoutPanel1.Controls.Add(button);
-        }
-
-        private string currentTurn = "X";
-
-        private string lastTurn;
-
-        public string LastTurn
-        {
-            get { return lastTurn; }
-            set
-            {
-                lastTurn = value;
-                UpdateUI();
-            }
-        }
-
-        public string CurrentTurn
-        {
-            get { return currentTurn; }
-            set
-            {
-                currentTurn = value;
-                UpdateUI();
-            }
-        }
-        private int turns;
-        private Button currentCell;
-
-        private void ClearBoard()
-        {
-            for (int i = 0; i < 9; i++)
-                ClearCell(i);
-
-            turns = 0;
-        }
-
-        private void ClearCell(int i)
-        {
-            buttons[i].Enabled = true;
-            buttons[i].Text = "";
-        }
-
 
         private void OnButtonClick(object sender, EventArgs e)
         {
-            currentCell = (Button)sender;
+            var button = (Button)sender;
+            int index = (int)button.Tag;
+            
+            board.MarkCell(index);
 
-            UpdateLogic();
-        }
+            UpdateUI();
+            
+            if (board.IsGameOver())
+            {
+                DisplayResult();
+                UpdateScore();
+                board.Clear();
+            }
 
-        private void UpdateLogic()
-        {
-            SwitchTurn();
-            CheckConditions();
+            UpdateUI();
         }
 
         private void UpdateUI()
         {
-            currentCell.Text = LastTurn;
-            currentCell.Enabled = false;
-            turn.Text = CurrentTurn;
-            label6.Text = DrawGames.ToString();
-            label3.Text = XWins.ToString();
-            label4.Text = YWins.ToString();
+            turn.Text = board.CurrentTurn;
+            label6.Text = drawGames.ToString();
+            label3.Text = xWins.ToString();
+            label4.Text = yWins.ToString();
+
+            string[] cells = board.cells;
+
+            for (int i = 0; i < 9; i++)
+                UpdateCell(cells[i], i);
         }
 
-        private void SwitchTurn()
+        private void UpdateCell(string value, int i)
         {
-            LastTurn = CurrentTurn;
-            if (CurrentTurn == "X")
-                CurrentTurn = "O";
-            else
-                CurrentTurn = "X";
-            turns++;
+            buttonsLayout.Controls[i].Text = value;
+            buttonsLayout.Controls[i].Enabled = string.IsNullOrEmpty(value);
         }
 
-        void CheckConditions()
+        private void DisplayResult()
         {
-            CheckRows("X");
-            CheckRows("O");
-            CheckColumns("X");
-            CheckColumns("O");
-            CheckFirstDiagonal("X");
-            CheckFirstDiagonal("O");
-            CheckSecondDiagonal("X");
-            CheckSecondDiagonal("O");
-            CheckDraw();
-        }
-
-        private void CheckDraw()
-        {
-            if (turns == 9)
+            if (board.IsDraw())
             {
-                MessageBox.Show("Game Draw");
-                DrawGames++;
-                ClearBoard();
-            }
-        }
-
-        private void CheckRows(string who)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                if (RowWins(i, who))
-                {
-                    Won(who);
-                    return;
-                }
-            }
-        }
-
-        private void CheckColumns(string who)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                if (ColumnWins(i, who))
-                {
-                    Won(who);
-                    return;
-                }
-            }
-        }
-
-        private void CheckFirstDiagonal(string who)
-        {
-            for (int i = 0; i < RowSize * ColumnSize; i+=4)
-            {
-                if (buttons[i].Text != who)
-                {
-                    return;
-                }
-            }
-            Won(who);
-        }
-
-        private void CheckSecondDiagonal(string who)
-        {
-            for (int i = 2; i < 7; i += 2)
-            {
-                if (buttons[i].Text != who)
-                {
-                    return;
-                }
-            }
-            Won(who);
-        }
-        
-        private void Won(string who)
-        {
-            MessageBox.Show(string.Format("{0} Wins", who));
-            UpdateScore(who);
-            ClearBoard();
-        }
-
-        private void UpdateScore(string who)
-        {
-            if (who == "X")
-            {
-                XWins++;
+                MessageBox.Show("Draw");
                 return;
             }
 
-            YWins++;
+            MessageBox.Show(String.Format("{0} won", board.LastTurn));
         }
 
-        private const int RowSize = 3;
-
-        private bool RowWins(int row, string who)
+        private void UpdateScore()
         {
-            int startWith = row * RowSize;
-
-            for (int i = startWith; i < startWith + RowSize; i++)
+            if (board.IsDraw())
             {
-                if (buttons[i].Text != who)
-                {
-                    return false;
-                }
+                drawGames++;
+                return;
             }
-            return true;
-        }
-
-        const int ColumnSize = 3;
-
-        private bool ColumnWins(int column, string who)
-        {
-            int startWith = column * RowSize;
-
-            for (int i = column; i < RowSize * ColumnSize; i+= RowSize)
+            
+            if (board.LastTurn == "X")
             {
-                if (buttons[i].Text != who)
-                {
-                    return false;
-                }
+                xWins++;
+                return;
             }
-            return true;
+
+            yWins++;
         }
     }
 }
